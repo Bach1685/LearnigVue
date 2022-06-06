@@ -8,13 +8,18 @@
   </head>
   <body>
     <div class="conteiner pt-5" id='app'>
-      <div class="card center">
-        <h1>Счётчик: {{counter}}</h1>
-        <div>
-          <button @click="inc" class="btn primary">Добавить</button>
-        <button @click="dec" class="btn danger">Вычесть</button>
+      <div class="card">
+        <h1>Список дел</h1>
+        <div class="form-control">
+          <input @keyup.enter="add" type="text" v-model="placeHolder">
         </div>
-        
+        <button @click="add" class="btn">Добавить</button>
+        <ul class="list">
+          <li v-for="item in posts" class="list-item">
+            {{item.value}}
+            <button @click="remove(item.id)" class="btn danger">Удалить</button>
+          </li>
+        </ul>
       </div>
     </div>
   </body>
