@@ -2,27 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue Basics</title>
-    <link rel="stylesheet" href="theme.css" />
+    <title>Vite App</title>
   </head>
   <body>
-    <div class="conteiner pt-5" id='app'>
-      <div class="card">
-        <h1>Список дел</h1>
-        <div class="form-control">
-          <input @keyup.enter="add" type="text" v-model="placeHolder">
-        </div>
-        <button @click="add" class="btn">Добавить</button>
-        <ul class="list">
-          <li v-for="item in posts" class="list-item">
-            {{item.value}}
-            <button @click="remove(item.id)" class="btn danger">Удалить</button>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
-  <script src="https://unpkg.com/vue@next"></script>
-  <script src="script.js"></script>
 </html>
