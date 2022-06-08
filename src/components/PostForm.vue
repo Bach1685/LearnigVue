@@ -33,7 +33,7 @@ export default {
     createPost() {
       this.post.id = this.currentId;
       this.$emit("createPost", this.post);
-      this.post = {};
+      // this.post = {};
       this.currentId++;
     },
   },

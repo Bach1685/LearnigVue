@@ -1,7 +1,12 @@
 
 <template>
   <div class="app">
-    <post-form @createPost="createPost" />
+    <h1>страница с постами</h1>
+    <my-button @click="showDialog"> Создать пост </my-button>
+    <my-dialog v-model:show="dialogVisible">
+      <post-form @createPost="createPost" />
+    </my-dialog>
+
     <post-list :posts="posts" @remove="removePost" />
   </div>
 </template>
@@ -16,11 +21,11 @@ export default {
   },
   data() {
     return {
-      post: {
-        id: 0,
-        title: "",
-        description: "",
-      },
+      // post: {
+      //   id: 0,
+      //   title: "",
+      //   description: "",
+      // },
       posts: [
         {
           id: 1,
@@ -33,16 +38,21 @@ export default {
           description: "567",
         },
       ],
+      dialogVisible: false,
     };
   },
   methods: {
     createPost(post) {
       this.posts.push(post);
+      this.dialogVisible = false;
     },
     removePost(_post) {
       console.log(12);
       let index = this.posts.findIndex((post) => post.id == _post.id);
       this.posts.splice(index, 1);
+    },
+    showDialog() {
+      this.dialogVisible = true;
     },
   },
 };
