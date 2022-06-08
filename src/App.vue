@@ -21,11 +21,6 @@ export default {
   },
   data() {
     return {
-      // post: {
-      //   id: 0,
-      //   title: "",
-      //   description: "",
-      // },
       posts: [
         {
           id: 1,
