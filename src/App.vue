@@ -2,7 +2,7 @@
 <template>
   <div class="app">
     <post-form @createPost="createPost" />
-    <post-list :posts="posts" />
+    <post-list :posts="posts" @remove="removePost" />
   </div>
 </template>
 
@@ -38,6 +38,11 @@ export default {
   methods: {
     createPost(post) {
       this.posts.push(post);
+    },
+    removePost(_post) {
+      console.log(12);
+      let index = this.posts.findIndex((post) => post.id == _post.id);
+      this.posts.splice(index, 1);
     },
   },
 };
