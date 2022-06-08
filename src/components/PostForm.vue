@@ -9,7 +9,7 @@
     />
     <my-input
       class="input"
-      v-model="post.description"
+      v-model:value="post.description"
       type="text"
       placeholder="Описание"
     />

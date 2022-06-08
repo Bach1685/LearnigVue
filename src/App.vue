@@ -2,6 +2,8 @@
 <template>
   <div class="app">
     <h1>страница с постами</h1>
+    <input type="text" v-model.trim="modificatorValue" />
+    <my-button @click="fetchPosts">Получить посты</my-button>
     <my-button @click="showDialog"> Создать пост </my-button>
     <my-dialog v-model:show="dialogVisible">
       <post-form @createPost="createPost" />
@@ -14,6 +16,7 @@
 <script>
 import PostForm from "./components/PostForm.vue";
 import PostList from "./components/PostList.vue";
+import axios from "axios";
 export default {
   components: {
     PostForm,
@@ -21,19 +24,9 @@ export default {
   },
   data() {
     return {
-      posts: [
-        {
-          id: 1,
-          title: "123",
-          description: "123",
-        },
-        {
-          id: 2,
-          title: "567",
-          description: "567",
-        },
-      ],
+      posts: [],
       dialogVisible: false,
+      modificatorValue: "",
     };
   },
   methods: {
@@ -42,12 +35,27 @@ export default {
       this.dialogVisible = false;
     },
     removePost(_post) {
-      console.log(12);
       let index = this.posts.findIndex((post) => post.id == _post.id);
       this.posts.splice(index, 1);
     },
     showDialog() {
       this.dialogVisible = true;
+    },
+    async fetchPosts() {
+      try {
+        let respons = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+        );
+        this.posts = Array.from(respons.data).map((item) => {
+          return {
+            id: item.id,
+            title: item.title,
+            description: item.body,
+          };
+        });
+      } catch (ex) {
+        console.log(ex);
+      }
     },
   },
 };
