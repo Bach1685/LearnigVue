@@ -2,8 +2,10 @@
 <template>
   <div class="app">
     <h1>страница с постами</h1>
-    <input type="text" v-model.trim="modificatorValue" />
-    <my-button @click="showDialog"> Создать пост </my-button>
+    <div class="app__btns">
+      <my-button @click="showDialog"> Создать пост </my-button>
+      <my-select v-model="selelectedSort"></my-select>
+    </div>
     <my-dialog v-model:show="dialogVisible">
       <post-form @createPost="createPost" />
     </my-dialog>
@@ -28,6 +30,16 @@ export default {
       dialogVisible: false,
       modificatorValue: "",
       isPostLoading: false,
+      selelectedSort: [
+        {
+          value: "title",
+          name: "По названию",
+        },
+        {
+          value: "description",
+          name: "По содержимому",
+        пше },
+      ],
     };
   },
   methods: {
@@ -74,6 +86,12 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.app__btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
 }
 
 .app {
