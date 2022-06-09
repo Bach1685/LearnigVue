@@ -11,6 +11,7 @@
     </transition-group>
   </div>
   <h2 v-else>Нет постов!</h2>
+  
 </template>
 
 <script>

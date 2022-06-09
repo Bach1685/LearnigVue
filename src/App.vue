@@ -17,17 +17,24 @@
       v-if="!isPostLoading"
     />
     <p v-else>Идёт загрузка...</p>
+    <pages-list
+      :page="page"
+      :pagesCount="totalPages"
+      @selectPage="selectPage"
+    />
   </div>
 </template>
 
 <script>
 import PostForm from "./components/PostForm.vue";
 import PostList from "./components/PostList.vue";
+import PagesList from "./components/PagesList.vue";
 import axios from "axios";
 export default {
   components: {
     PostForm,
     PostList,
+    PagesList,
   },
   data() {
     return {
@@ -37,6 +44,9 @@ export default {
       isPostLoading: false,
       selectedSort: "",
       searchQuery: "",
+      totalPages: 0,
+      page: 1,
+      limit: 5,
       sortOptions: [
         {
           value: "title",
@@ -61,11 +71,24 @@ export default {
     showDialog() {
       this.dialogVisible = true;
     },
+    selectPage(page) {
+      this.page = page;
+      this.fetchPosts();
+    },
     async fetchPosts() {
       try {
         this.isPostLoading = true;
         let respons = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          respons.headers["x-total-count"] / this.limit
         );
         this.posts = Array.from(respons.data).map((item) => {
           return {
