@@ -17,11 +17,12 @@
       v-if="!isPostLoading"
     />
     <p v-else>Идёт загрузка...</p>
-    <pages-list
+    <!-- <pages-list
       :page="page"
       :pagesCount="totalPages"
       @selectPage="selectPage"
-    />
+    /> -->
+    <div ref="observer" class="observer"></div>
   </div>
 </template>
 
@@ -46,7 +47,7 @@ export default {
       searchQuery: "",
       totalPages: 0,
       page: 1,
-      limit: 5,
+      limit: 10,
       sortOptions: [
         {
           value: "title",
@@ -71,10 +72,10 @@ export default {
     showDialog() {
       this.dialogVisible = true;
     },
-    selectPage(page) {
-      this.page = page;
-      this.fetchPosts();
-    },
+    // selectPage(page) {
+    //   this.page = page;
+    //   this.fetchPosts();
+    // },
     async fetchPosts() {
       try {
         this.isPostLoading = true;
@@ -103,9 +104,47 @@ export default {
         this.isPostLoading = false;
       }
     },
+    async loadMorePosts() {
+      try {
+        this.page++;
+        let respons = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          respons.headers["x-total-count"] / this.limit
+        );
+        let newPosts = Array.from(respons.data).map((item) => {
+          return {
+            id: item.id,
+            title: item.title,
+            description: item.body,
+          };
+        });
+        this.posts = [...this.posts, ...newPosts];
+      } catch (ex) {
+        alert(ex);
+      }
+    },
   },
   mounted() {
     this.fetchPosts();
+    const options = {
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+    const callback = (entries, observer) => {
+      if (entries[0].isIntersecting && this.posts.length > this.page) {
+        this.loadMorePosts();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
@@ -121,7 +160,6 @@ export default {
       );
     },
   },
-
   watch: {
     selectedSort(newValue) {
       // console.log(this.selectedSort);
@@ -146,6 +184,10 @@ export default {
 
 .app {
   padding: 20px;
+}
+.observer {
+  height: 30px;
+  background: green;
 }
 </style>
 I
