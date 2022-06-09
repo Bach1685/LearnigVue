@@ -94,7 +94,7 @@ export default {
     },
     sortedAndSearchedPosts() {
       return this.sortedPosts.filter((post) =>
-        post.title.includes(this.searchQuery)
+        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     },
   },
