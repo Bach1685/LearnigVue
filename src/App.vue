@@ -2,6 +2,7 @@
 <template>
   <div class="app">
     <h1>страница с постами</h1>
+    <my-input v-model:value="searchQuery" placeholder="Поиск..." />
     <div class="app__btns">
       <my-button @click="showDialog"> Создать пост </my-button>
       <my-select v-model="selectedSort" :options="sortOptions"></my-select>
@@ -11,7 +12,7 @@
     </my-dialog>
 
     <post-list
-      :posts="sortedPosts"
+      :posts="sortedAndSearchedPosts"
       @remove="removePost"
       v-if="!isPostLoading"
     />
@@ -35,6 +36,7 @@ export default {
       modificatorValue: "",
       isPostLoading: false,
       selectedSort: "",
+      searchQuery: "",
       sortOptions: [
         {
           value: "title",
@@ -90,7 +92,13 @@ export default {
         );
       });
     },
+    sortedAndSearchedPosts() {
+      return this.sortedPosts.filter((post) =>
+        post.title.includes(this.searchQuery)
+      );
+    },
   },
+
   watch: {
     selectedSort(newValue) {
       // console.log(this.selectedSort);
