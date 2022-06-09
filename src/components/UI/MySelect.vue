@@ -1,7 +1,9 @@
 <template>
   <select v-model="modelValue" @change="changeOption">
     <option disabled value="">Выберите из списка</option>
-    <option v-for="option of options" :key="option.value"></option>
+    <option v-for="option of options" :key="option.value">
+      {{ option.name }}
+    </option>
   </select>
 </template>
 <script>
@@ -11,14 +13,14 @@ export default {
     modelValue: {
       type: String,
     },
-    option: {
+    options: {
       type: Array,
       default: () => [],
     },
   },
   methods: {
     changeOption(event) {
-      this.$emit("update:modelValue", event);
+      this.$emit("update:modelValue", event.target.value);
     },
   },
 };

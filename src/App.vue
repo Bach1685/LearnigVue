@@ -4,7 +4,7 @@
     <h1>страница с постами</h1>
     <div class="app__btns">
       <my-button @click="showDialog"> Создать пост </my-button>
-      <my-select v-model="selelectedSort"></my-select>
+      <my-select v-model="selelectedSort" :options="sortOptions"></my-select>
     </div>
     <my-dialog v-model:show="dialogVisible">
       <post-form @createPost="createPost" />
@@ -30,7 +30,8 @@ export default {
       dialogVisible: false,
       modificatorValue: "",
       isPostLoading: false,
-      selelectedSort: [
+      selelectedSort: "",
+      sortOptions: [
         {
           value: "title",
           name: "По названию",
@@ -38,7 +39,7 @@ export default {
         {
           value: "description",
           name: "По содержимому",
-        пше },
+        },
       ],
     };
   },
