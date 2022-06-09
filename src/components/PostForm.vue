@@ -31,10 +31,18 @@ export default {
   },
   methods: {
     createPost() {
-      this.post.id = this.currentId;
+      this.post.id = Date.now;
       this.$emit("createPost", this.post);
       // this.post = {};
       this.currentId++;
+    },
+  },
+  watch: {
+    post: {
+      handler(newValue) {
+        console.log(newValue);
+      },
+      deep: true,
     },
   },
 };
