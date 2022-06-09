@@ -85,7 +85,6 @@ export default {
   computed: {
     sortedPosts() {
       return this.posts.sort((post1, post2) => {
-        console.log(post1);
         return post1[this.selectedSort]?.localeCompare(
           post2[this.selectedSort]
         );
@@ -100,7 +99,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 * {
