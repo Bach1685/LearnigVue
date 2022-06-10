@@ -17,7 +17,10 @@
       v-if="!isPostLoading"
     />
     <p v-else>Идёт загрузка...</p>
-    <div ref="observer" class="observer"></div>
+    <div
+      v-intersection="{ isEnd: posts.length > page, callback: loadMorePosts }"
+      class="observer"
+    ></div>
   </div>
 </template>
 
@@ -126,17 +129,17 @@ export default {
   },
   mounted() {
     this.fetchPosts();
-    const options = {
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-    const callback = (entries, observer) => {
-      if (entries[0].isIntersecting && this.posts.length > this.page) {
-        this.loadMorePosts();
-      }
-    };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.$refs.observer);
+    // const options = {
+    //   rootMargin: "0px",
+    //   threshold: 1.0,
+    // };
+    // const callback = (entries, observer) => {
+    //   if (entries[0].isIntersecting && this.posts.length > this.page) {
+    //     this.loadMorePosts();
+    //   }
+    // };
+    // const observer = new IntersectionObserver(callback, options);
+    // observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
