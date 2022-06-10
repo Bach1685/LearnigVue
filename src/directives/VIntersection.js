@@ -1,4 +1,5 @@
 export default {
+  name: "intersection",
   mounted(el, binding) {
     console.log(binding);
     const options = {
