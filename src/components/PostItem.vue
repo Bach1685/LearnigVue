@@ -6,6 +6,9 @@
       <p><span class="post-title">Описание:</span> {{ post.description }}</p>
     </div>
     <div class="post_btn">
+      <my-button @click="$router.push(`/posts/${post.id}`)" class="btn"
+        >Открыть</my-button
+      >
       <my-button @click="$emit('remove', post)" class="btn">Удалить</my-button>
       <div class="fghj"></div>
     </div>
@@ -34,6 +37,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.post_btn {
+  display: flex;
 }
 
 .fghj {
