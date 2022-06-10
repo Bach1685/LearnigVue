@@ -7,6 +7,7 @@
     </div>
     <div class="post_btn">
       <my-button @click="$emit('remove', post)" class="btn">Удалить</my-button>
+      <div class="fghj"></div>
     </div>
   </div>
 </template>
@@ -33,6 +34,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.fghj {
+  display: flex;
 }
 .post-title {
   font-size: 18px;
