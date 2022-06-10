@@ -8,18 +8,7 @@
 <script>
 export default {
   name: "my-dialog",
-  props: {
-    show: {
-      type: Boolean,
-      defoult: false,
-    },
-  },
-
-  methods: {
-    hideDialog() {
-      this.$emit("update:show", false);
-    },
-  },
+  mixins: [toggleMixin],
 };
 </script>
 <style scoped>
