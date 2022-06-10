@@ -1,4 +1,5 @@
 import Main from "../pages/Main.vue";
+import PostPageWithStore from "../pages/PostPageWithStore.vue";
 import PostPage from "../pages/PostPage.vue";
 import About from "../pages/About.vue";
 import PostIdPage from "../pages/PostIdPage.vue";
@@ -20,6 +21,10 @@ const routes = [
   {
     path: "/posts/:id",
     component: PostIdPage,
+  },
+  {
+    path: "/store",
+    component: PostPageWithStore,
   },
 ];
 

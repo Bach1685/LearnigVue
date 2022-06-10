@@ -2,6 +2,7 @@
   <div class="post">
     <div>
       <div>{{ post.id }}</div>
+      <div>количество лайков: {{ $store.state.likes }}</div>
       <h5><span class="post-title">Название:</span>{{ post.title }}</h5>
       <p><span class="post-title">Описание:</span> {{ post.description }}</p>
     </div>

@@ -6,6 +6,7 @@
   </div>
 </template>       
 <script>
+import toggleMixin from "../../mixsins/toggleMixin";
 export default {
   name: "my-dialog",
   mixins: [toggleMixin],
