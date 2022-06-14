@@ -13,7 +13,7 @@
 
     <post-list
       :posts="sortedAndSearchedPosts"
-      @remove="removePost(post)"
+      @remove="removePost"
       v-if="!isPostLoading"
     />
     <p v-else>Идёт загрузка...</p>
