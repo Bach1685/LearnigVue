@@ -1,23 +1,9 @@
 import { createStore } from "vuex";
+import { postModule } from "./postModule";
 
 export default createStore({
-  state: {
-    likes: 1,
-    isAuth: false,
+  
+  modules: {
+    post: postModule
   },
-  getters: {
-    doubleLikes(state) {
-      return state.likes * 2;
-    },
-  },
-  mutations: {
-    incrementLikes(state) {
-      state.likes++;
-    },
-    decrementLikes(state) {
-      state.likes--;
-    },
-  },
-  actions: {},
-  modules: {},
 });
