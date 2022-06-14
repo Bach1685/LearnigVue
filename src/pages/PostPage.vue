@@ -13,7 +13,7 @@
 
     <post-list
       :posts="sortedAndSearchedPosts"
-      @remove="removePost()"
+      @remove="removePost(post)"
       v-if="!isPostLoading"
     />
     <p v-else>Идёт загрузка...</p>
@@ -65,7 +65,6 @@ export default {
       this.dialogVisible = false;
     },
     removePost(_post) {
-      console.log(12);
       let index = this.posts.findIndex((post) => post.id == _post.id);
       this.posts.splice(index, 1);
     },
@@ -130,18 +129,6 @@ export default {
   },
   mounted() {
     this.fetchPosts();
-    console.log(this.sortedAndSearchedPosts);
-    // const options = {
-    //   rootMargin: "0px",
-    //   threshold: 1.0,
-    // };
-    // const callback = (entries, observer) => {
-    //   if (entries[0].isIntersecting && this.posts.length > this.page) {
-    //     this.loadMorePosts();
-    //   }
-    // };
-    // const observer = new IntersectionObserver(callback, options);
-    // observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {

@@ -1,7 +1,6 @@
 export default {
   name: "intersection",
   mounted(el, binding) {
-    console.log(binding);
     const options = {
       rootMargin: "0px",
       threshold: 1.0,
